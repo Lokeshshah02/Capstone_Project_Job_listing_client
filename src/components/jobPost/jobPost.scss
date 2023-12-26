@@ -1,0 +1,101 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.job-container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+
+}
+
+.description {
+  height: 90%;
+  width: 50%;
+  margin-top: 10px;
+
+  h2 {
+    margin-left: 35px;
+    margin-top: 10px;
+  }
+}
+
+.job-details {
+  height: 90%;
+  width: 100%;
+  margin-left: 40px;
+  margin-top: 20px;
+
+  .form-field {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+
+    label {
+      margin-right: 1rem;
+      width: 20%;
+    }
+
+    input {
+      width: 60%;
+      height: 1.4rem;
+      display: flex;
+      align-items: flex-start;
+      &::placeholder {
+        font-size: 13px;
+      }
+    }
+
+    select {
+      width: 20%;
+      height: 2rem;
+    }
+    #jobDescription,
+    #aboutCompany {
+      height: 80px;
+    }
+  }
+
+  .button-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 82%;
+    gap: 10px;
+
+    #cancel {
+      width: 20%;
+      height: 2rem;
+      border: 2px solid #c2c2c2;
+      background-color: white;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      color: #c2c2c2;
+    }
+    #add {
+      height: 2rem;
+      width: 20%;
+      background-color: #ed5353;
+      border: none;
+      border-radius: 0.5rem;
+      color: white;
+      cursor: pointer;
+    }
+  }
+}
+
+.image-container {
+  background-image: url(../../assests/jobpost.png);
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  width: 50%;
+
+  h2 {
+    color: white;
+    padding: 2rem 8rem;
+    font-size: 40px;
+  }
+}

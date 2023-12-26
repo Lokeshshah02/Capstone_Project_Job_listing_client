@@ -1,0 +1,138 @@
+.main-container {
+  height: 100vh;
+  width: 100%;
+  background: #ffefef;
+
+  // nav {
+  //   height: 13%;
+  //   // border-radius: 0px 0px 40px 40px;
+  //   // background: #ed5353;
+
+  //   // .nav-container {
+  //   //   display: flex;
+  //   //   justify-content: space-between;
+  //   //   align-items: center;
+
+  //   //   .job-finder {
+  //   //     margin: 14px;
+  //   //     color: white;
+  //   //     font-size: 25px;
+  //   //   }
+
+  //   //   .registrations {
+  //   //     margin: 14px;
+  //   //     color: rgb(240, 233, 233);
+  //   //     font-size: 20px;
+  //   //     display: flex;
+  //   //     flex-direction: row;
+  //   //     gap: 5px;
+
+  //   //     .login button {
+  //   //       height: 40px;
+  //   //       width: 100px;
+  //   //       border-radius: 7px;
+  //   //       border: 2px solid white;
+  //   //       color: #fff;
+  //   //       background: #ff6b6b;
+  //   //     }
+  //   //     .register button {
+  //   //       height: 40px;
+  //   //       width: 100px;
+  //   //       border-radius: 7px;
+  //   //       border: none;
+  //   //       background: #fff;
+  //   //     }
+  //   //   }
+  //   // }
+  // }
+  //title
+  .job-title {
+    position: relative;
+    z-index: 1;
+    p {
+      font-size: 23px;
+      padding: 30px;
+      height: 140px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin: -14px 120px 3px;
+      background: #fff;
+      box-shadow: 0px 4px 23px 2px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+  }
+
+  .main-description {
+    // height: 60vh;
+    padding: 20px;
+    margin: 20px 120px 3px;
+    background: #fff;
+    box-shadow: 0px 4px 23px 2px rgba(0, 0, 0, 0.1);
+    // overflow: auto;
+    // scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    #posted {
+      margin-top: 5px;
+      color: #999999;
+      font-size: 12px;
+    }
+    h2{
+      margin-top: 5px;
+
+    }
+    #location {
+      margin-top: 5px;
+
+      color: #ed5353;
+    }
+
+    .stipend-container {
+      margin-top: 18px;
+      .stipend {
+        display: flex;
+        flex-direction: row;
+        gap: 4.4rem;
+        color: #999999;
+      }
+
+      .duration {
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+      }
+    }
+    .about-company ,.about-job {
+      margin-top: 12px;
+      p{
+        margin-top: 10px;
+
+      }
+    }
+
+    .skills {
+      margin-top: 12px;
+      .style-skills {
+        display: flex;
+        flex-direction: row;
+        gap: 7px;
+        margin-top: 4px;
+        p {
+          display: inline-block;
+          height: 20px;
+          border-radius: 5px;
+          background: #fee;
+          padding: 0 8px;
+        }
+      }
+    }
+    .info {
+      margin-top: 12px;
+      p{
+        margin-top: 10px;
+
+      }
+    }
+  }
+}

@@ -1,0 +1,122 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  //input search
+  .job-title-container {
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .inner-box {
+      width: 80%;
+      background: #fff;
+      box-shadow: 0px 0px 22px 4px rgba(255, 32, 32, 0.25);
+      padding: 1rem 4rem;
+      .search-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        img {
+          position: relative;
+          /* left: 43px; */
+          width: 23px;
+          /* padding-left: 10px; */
+          display: no;
+          right: -35px;
+        }
+        input {
+          width: 100%;
+          height: 2.5rem;
+          border-radius: 6px;
+          padding-left: 3rem;
+        }
+      }
+      .skills-container {
+        display: flex;
+        justify-content: flex-start;
+        padding: 1.5rem;
+        align-items: center;
+        gap: 2rem;
+        width: 100%;
+        .left{
+          width: 80%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2rem;
+        .dropdown {
+          select {
+            padding: 0.5rem;
+            border-radius: 6px;
+          }
+        }
+        .skill-name {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 10px;
+          .names {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            p {
+              background: #ffeeee;
+              padding: 7px 9px 7px 7px;
+            }
+            span {
+              background: #ff6b6b;
+              padding: 6px 7px 6px 0px;
+              svg {
+                position: relative;
+                left: 4px;
+                top: 2px;
+                color: white;
+              }
+            }
+          }
+        }
+        .clear{
+          p{
+            color: #ED5353;
+          }
+        }
+      }
+      .right{
+        width: 20%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        button{
+          padding: 8px 23px;
+    background: #ED5353;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+        }
+      }
+      }
+    }
+  }
+
+  //display job details
+  .job-details-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+  
+  }
+}
