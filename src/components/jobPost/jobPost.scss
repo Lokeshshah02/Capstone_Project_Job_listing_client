@@ -8,7 +8,6 @@
   height: 100vh;
   width: 100%;
   display: flex;
-
 }
 
 .description {
@@ -39,18 +38,22 @@
     }
 
     input {
+      box-sizing: border-box;
       width: 60%;
       height: 1.4rem;
-      display: flex;
-      align-items: flex-start;
+      padding: 5px;
+      
       &::placeholder {
         font-size: 13px;
+        position: absolute;
+        top: 5px;
       }
     }
 
     select {
       width: 20%;
       height: 2rem;
+      color: #6a6666;
     }
     #jobDescription,
     #aboutCompany {

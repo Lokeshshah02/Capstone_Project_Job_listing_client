@@ -3,11 +3,13 @@ import "./login.scss";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useGlobal } from "../Context/Context";
 
 const Login = () => {
   const initialValue = { email: "", password: "" };
   const [formData, setFormData] = useState(initialValue);
   const navigate = useNavigate();
+  const {register} = useGlobal
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
@@ -26,8 +28,9 @@ const Login = () => {
         formData
       );
       console.log(response.data);
-      const { jwtToken } = response.data;
+      const { jwtToken, recruiterName } = response.data;
       localStorage.setItem("jwtToken", jwtToken);
+      localStorage.setItem("userName", recruiterName);
       if (jwtToken) {
         toast.success("Logged in successfully");
         setTimeout(() => {
@@ -48,9 +51,7 @@ const Login = () => {
     }
   };
 
-  const handleClick = () => {
-    navigate("/");
-  };
+ 
   return (
     <section className="login-container">
       <div className="left">
@@ -82,7 +83,7 @@ const Login = () => {
               </div>
 
               <div className="buttons">
-                <button type="submit">Sign in</button>
+                <button type="submit">Sign In</button>
               </div>
             </form>
           </div>
@@ -90,7 +91,7 @@ const Login = () => {
           <div className="content">
             <p>
               Don’t have an account?
-              <a href="#" onClick={handleClick}>
+              <a href="#" onClick={register}>
                 Sign Up
               </a>
             </p>

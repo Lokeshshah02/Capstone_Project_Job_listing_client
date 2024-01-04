@@ -1,23 +1,20 @@
-import './App.css';
-import Login from './components/Login/Login';
-import Register from './components/registrationPages/Register';
-import JobPost from './components/jobPost/JobPost';
-import JobDetails from './components/jobDetails/JobDetails'
-import { Route, Routes } from 'react-router-dom';
-import HomePage from './components/MainPage/HomePage';
-
-
+import "./App.css";
+import Login from "./components/Login/Login";
+import Register from "./components/registrationPages/Register";
+import JobPost from "./components/JobPost/JobPost";
+import { Route, Routes } from "react-router-dom";
+import HomePage from "./components/MainPage/HomePage";
+import JobDetails from "./components/JobDetails/JobDetails"
 function App() {
   return (
     <div>
- <Routes>
-<Route path="/" element={<Register/>}/>
-<Route path="/login" element={<Login/>}/>
-<Route path="/jobPost" element={<JobPost/>}/>
-<Route path="/jobDetails" element={<JobDetails/>}/>
-<Route path="/home" element={<HomePage/>}/>
- </Routes>
-     
+      <Routes>
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/jobPost" element={<JobPost />} />
+        <Route path="/jobDetails/:id" element={JobDetails} />
+        <Route path="/" element={<HomePage />} />
+      </Routes>
     </div>
   );
 }

@@ -3,9 +3,11 @@ import "./jobPost.scss";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import {useNavigate} from "react-router-dom"
+import { useGlobal } from "../Context/Context";
 
 const JobPost = () => {
   const navigate = useNavigate();
+  const {cancel} = useGlobal();
 
   const initialValues = {
     companyName: "",
@@ -73,9 +75,7 @@ const JobPost = () => {
     }
   };
 
-  const cancelHandler = () => {
-    setFormData(initialValues);
-  };
+
 
   return (
     <div>
@@ -212,7 +212,7 @@ const JobPost = () => {
                 />
               </div>
               <div className="button-container">
-                <button id="cancel" onChange={cancelHandler}>
+                <button id="cancel" onChange={cancel}>
                   Cancel
                 </button>
                 <button id="add" onChange={handleSubmit}>

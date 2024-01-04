@@ -3,11 +3,13 @@ import "./register.scss";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import { useGlobal } from "../Context/Context";
 
 const Register = () => {
   const navigate = useNavigate();
   const initialValue = { userName: "", email: "", phone: "", password: "" };
   const [formData, setFormData] = useState(initialValue);
+  const {login} = useGlobal
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
@@ -18,38 +20,36 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .post("http://localhost:4001/user/signup", formData)
-      .then((res) => {
-        console.log(res.data);
-        const registerJwtToken = res.data.jwtToken;
-  
-        if (registerJwtToken) {
-          localStorage.setItem('jwtToken', registerJwtToken);
-  
-          toast.success(res.data.message);
-          setTimeout(() => {
-            navigate("/jobpost");
-          }, 1000);
-        } else {
-          toast.error('unable to create token');
-        }
-      })
-      .catch((error) => {
-        console.log("unable to register", error);
-        if (error.response && error.response.data && error.response.data.message) {
-          toast.error(error.response.data.message);
-        }
-      });
-  };
-  
-  
 
-  const handleClick = () => {
-    navigate('/login');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    try {
+      const res = await axios.post("http://localhost:4001/user/signup", formData);
+      const { jwtToken, recruiterName, message } = res.data;
+  
+      if (jwtToken) {
+        localStorage.setItem('jwtToken', jwtToken);
+        localStorage.setItem('userName', recruiterName);
+  
+        toast.success(message);
+        setTimeout(() => {
+          navigate("/jobpost");
+        }, 1000);
+      } else {
+        toast.error('Unable to create token');
+      }
+    } catch (error) {
+      console.error("Unable to register", error);
+  
+      if (error.response && error.response.data && error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("An error occurred during registration.");
+      }
+    }
   };
+
   return (
     <section className="register-container">
       <div className="left">
@@ -110,7 +110,7 @@ const Register = () => {
           <div className="content">
             <p>
               Already have an account?
-              <a href="#" onClick={handleClick}>
+              <a href="#" onClick={login}>
                 Sign In
               </a>
             </p>
