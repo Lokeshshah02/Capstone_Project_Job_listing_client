@@ -45,7 +45,7 @@ const JobPost = () => {
       "Content-Type": "application/json",
     };
   
-    axios.post("http://localhost:4001/user/jobpost", formData, { headers })
+    axios.post("https://job-portal-0aw1.onrender.com/user/jobpost", formData, { headers })
       .then((res) => {
         try {
           if (!jwttoken) {
@@ -82,7 +82,7 @@ const JobPost = () => {
   const handleEditButton=()=>{
     const jobId = formData._id;
 
-    axios.put(`http://localhost:4001/user/updatejobpost`, formData, {
+    axios.put(`https://job-portal-0aw1.onrender.com/user/updatejobpost`, formData, {
       params: {
         _id: jobId,
       },

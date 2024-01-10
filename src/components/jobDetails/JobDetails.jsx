@@ -16,7 +16,7 @@ const JobDetails = () => {
       try {
         console.log("Before axios request - _id:", id);
         const response = await axios.get(
-          `http://localhost:4001/user/viewjobdetails?_id=${id}`
+          `https://job-portal-0aw1.onrender.com/user/viewjobdetails?_id=${id}`
         );
 
         if (response.data.jobPosts) {

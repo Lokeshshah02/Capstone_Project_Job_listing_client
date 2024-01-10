@@ -24,7 +24,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:4001/user/login",
+        "https://job-portal-0aw1.onrender.com/user/login",
         formData
       );
       console.log(response.data);

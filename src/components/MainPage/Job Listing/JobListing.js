@@ -19,7 +19,7 @@ const JobListing = ({searchQuery, selectedSkills}) => {
     const fetchJobs = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4001/user/getalljobs"
+          "https://job-portal-0aw1.onrender.com/user/getalljobs"
         );
 
         if (Array.isArray(response.data.job)) {

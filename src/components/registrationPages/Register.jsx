@@ -25,7 +25,7 @@ const Register = () => {
     e.preventDefault();
   
     try {
-      const res = await axios.post("http://localhost:4001/user/signup", formData);
+      const res = await axios.post("https://job-portal-0aw1.onrender.com/user/signup", formData);
       const { jwtToken, recruiterName, message } = res.data;
   
       if (jwtToken) {

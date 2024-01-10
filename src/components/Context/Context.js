@@ -43,7 +43,7 @@ const AppProvider = ({ children }) => {
 
   const handleEditJob = (jobId) => {
     axios
-      .get("http://localhost:4001/user/fetchJobPost", {
+      .get("https://job-portal-0aw1.onrender.com/user/fetchJobPost", {
         params: {
           _id: jobId,
         },
