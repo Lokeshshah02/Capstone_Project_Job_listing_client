@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import "./jobPost.scss";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-import {useNavigate} from "react-router-dom"
 import { useGlobal } from "../Context/Context";
 
 const JobPost = () => {
-  const navigate = useNavigate();
-  const {cancel} = useGlobal();
+  const { cancel, fetchSingleJob, addSkillsToList  } = useGlobal();
 
   const initialValues = {
     companyName: "",
@@ -22,7 +20,9 @@ const JobPost = () => {
     skills: "",
     information: "",
   };
-  const [formData, setFormData] = useState(initialValues);
+  const initialFormData = fetchSingleJob ? { ...fetchSingleJob.fetchJob }: initialValues;
+
+  const [formData, setFormData] = useState(initialFormData);
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
@@ -34,48 +34,75 @@ const JobPost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    try {
-      const jwttoken = localStorage.getItem("jwtToken");
-
-      if (!jwttoken) {
-        toast.error("User not authenticated");
-        return;
-      }
-
-      console.log("Received token from local storage", jwttoken);
-
-      const jobPost = await axios.post(
-        "http://localhost:4001/user/jobpost",
-        formData,
-        {
-          headers: {
-            "Accept": "application/json",
-            "Authorization": `Bearer ${jwttoken}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      console.log("Request Headers", jobPost.config.headers);
-      console.log("Server Response", jobPost.data);
-
-      toast.success(jobPost.data.message);
-      navigate("/")
-    } catch (error) {
-      console.error("Unable to post job", error.response);
-
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
-        toast.error(error.response.data.message);
-      }
-    }
+    formData._id ? handleEditButton() : jobPost();
   };
+  
+  const jobPost = () => {
+    const jwttoken = localStorage.getItem("jwtToken");
+    const headers = {
+      Accept: "application/json",
+      Authorization: `Bearer ${jwttoken}`,
+      "Content-Type": "application/json",
+    };
+  
+    axios.post("http://localhost:4001/user/jobpost", formData, { headers })
+      .then((res) => {
+        try {
+          if (!jwttoken) {
+            toast.error("User not authenticated");
+            return;
+          }
+  
+          console.log("Received token from local storage", jwttoken);
+  
+          toast.success(res.data.message);
+          addSkillsToList(formData.skills);
+          setTimeout(() => {
+            setFormData(initialValues);
+          }, 1000);
+        } catch (error) {
+          console.error("Unable to post job", error.response);
+  
+          if (
+            error.response &&
+            error.response.data &&
+            error.response.data.message
+          ) {
+            toast.error(error.response.data.message);
+          }
+        }
+      })
+      .catch((error) => {
+        console.error("Error posting job", error);
+      });
+  };
+  
+  
 
+  const handleEditButton=()=>{
+    const jobId = formData._id;
 
+    axios.put(`http://localhost:4001/user/updatejobpost`, formData, {
+      params: {
+        _id: jobId,
+      },
+    })
+      .then((res)=>{
+        setFormData(res.data)
+        console.log(res.data)
+        toast.success(res.data.message);
+       setTimeout(() => {
+         setFormData(initialValues)
+       }, 1000);
+      })
+      .catch((error)=>{
+       console.log(error)
+       if (error.response && error.response.data && error.response.data.message) {
+         toast.error(error.response.data.message);
+       }
+      })
+
+}
 
   return (
     <div>
@@ -121,7 +148,7 @@ const JobPost = () => {
               <div className="form-field">
                 <label htmlFor="monthlySalary">Monthly salary</label>
                 <input
-                  type="number"
+                  type="text"
                   id="monthlySalary"
                   name="monthlySalary"
                   placeholder="Enter Amount in rupees"
@@ -151,7 +178,6 @@ const JobPost = () => {
                   onChange={changeHandler}
                 >
                   <option value="Select">Select</option>
-
                   <option value="remote">remote</option>
                   <option value="office">office</option>
                 </select>
@@ -212,13 +238,22 @@ const JobPost = () => {
                 />
               </div>
               <div className="button-container">
-                <button id="cancel" onChange={cancel}>
+                <button id="cancel" onClick={cancel}>
                   Cancel
                 </button>
-                <button id="add" onChange={handleSubmit}>
+                {
+                  formData._id ? (
+<button id="add" onClick={handleSubmit}>
                   {" "}
+                  + update Job
+                </button>
+                  ):(
+
+                <button id="add" onClick={handleSubmit}>
                   + Add Job
                 </button>
+                  )
+                }
               </div>
               <Toaster position="top-center" reverseOrder={false} />
             </form>

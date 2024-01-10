@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from "react";
 import "./jobDetails.scss";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import { Header } from "../MainPage/Header/Header";
 import axios from "axios";
+import { useGlobal } from "../Context/Context";
 
 const JobDetails = () => {
   const [viewJobDetails, setViewJobDetails] = useState({});
-  const {id}= useParams();
+  const { isRegistered, isLoggedIn, handleEditJob } = useGlobal(null);
+  const { id } = useParams();
+  console.log("Fetching data for _id:", id);
 
   useEffect(() => {
-    console.log('Fetching data for _id:', id);
-
     const fetchData = async () => {
       try {
-        console.log('Before axios request - _id:', id);
+        console.log("Before axios request - _id:", id);
+        const response = await axios.get(
+          `http://localhost:4001/user/viewjobdetails?_id=${id}`
+        );
 
-        const response = await axios.get(`http://localhost:4001/user/viewjobdetails?_id=${id}`);
-        
         if (response.data.jobPosts) {
           setViewJobDetails(response.data.jobPosts);
           console.log("job post data", response.data);
@@ -25,10 +27,9 @@ const JobDetails = () => {
         console.error("Error fetching job details:", error.message);
       }
     };
-  
+
     fetchData();
   }, [id]);
-  
 
   return (
     <>
@@ -38,15 +39,34 @@ const JobDetails = () => {
         </div>
 
         <div className="job-title">
-          <p>
-            WordPress Development work from home job/internship at Adyaka
-            Infosec Private Limited
-          </p>
+          <p>About work related Information.</p>
         </div>
 
         <div className="main-description" key={viewJobDetails._id}>
-          <p id="posted">1w ago. {viewJobDetails.remote ? 'remote' : 'office'}</p>
-          <h2>{viewJobDetails.companyName}</h2>
+          <div className="display-date-image">
+            <p id="posted">
+              1w ago. {viewJobDetails.remote ? "remote" : "office"}
+            </p>
+            <div className="imageDisplay">
+              <div className="image">
+                <img src={viewJobDetails.addLogoUrl} alt="" />
+                <p>{viewJobDetails.companyName}</p>
+              </div>
+            </div>
+          </div>
+
+          {isLoggedIn || isRegistered ? (
+            <>
+              <div className="edit-button">
+                <h2>{viewJobDetails.jobPosition}</h2>
+                <button onClick={() => handleEditJob(viewJobDetails._id)}>
+                  Edit job
+                </button>
+              </div>
+            </>
+          ) : (
+            <p></p>
+          )}
           <p id="location">{viewJobDetails.location}</p>
 
           <div className="stipend-container">
@@ -72,7 +92,13 @@ const JobDetails = () => {
           <div className="skills">
             <h4>Skill(s) required</h4>
             <div className="style-skills">
-              <p>{viewJobDetails.skills}</p>
+              {Array.isArray(viewJobDetails.skills) ? (
+                viewJobDetails.skills.map((skill, index) => (
+                  <p key={index}>{skill}</p>
+                ))
+              ) : (
+                <p>{viewJobDetails.skills}</p>
+              )}
             </div>
           </div>
 

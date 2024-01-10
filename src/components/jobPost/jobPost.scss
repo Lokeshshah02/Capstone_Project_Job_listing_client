@@ -31,6 +31,7 @@
     display: flex;
     align-items: flex-start;
     margin-bottom: 1rem;
+    text-align: start;
 
     label {
       margin-right: 1rem;
@@ -42,11 +43,13 @@
       width: 60%;
       height: 1.4rem;
       padding: 5px;
+      text-align: start;
       
       &::placeholder {
         font-size: 13px;
         position: absolute;
         top: 5px;
+
       }
     }
 
@@ -58,6 +61,7 @@
     #jobDescription,
     #aboutCompany {
       height: 80px;
+      text-align: start;
     }
   }
 

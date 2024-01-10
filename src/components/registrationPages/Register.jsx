@@ -9,7 +9,7 @@ const Register = () => {
   const navigate = useNavigate();
   const initialValue = { userName: "", email: "", phone: "", password: "" };
   const [formData, setFormData] = useState(initialValue);
-  const {login} = useGlobal
+  const {login} = useGlobal()
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
