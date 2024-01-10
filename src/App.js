@@ -1,8 +1,8 @@
 import "./App.css";
 import Login from "./components/Login/Login";
 import Register from "./components/registrationPages/Register";
-import JobPost from "./components/JobPost/JobPost";
 import { Route, Routes } from "react-router-dom";
+import JobPost from "./components/JobPost/JobPost"
 import HomePage from "./components/MainPage/HomePage";
 import JobDetails from "./components/JobDetails/JobDetails"
 function App() {
